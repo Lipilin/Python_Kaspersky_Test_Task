@@ -7,10 +7,14 @@ authors = [
     { name = "Егор Липилин", email = "egorlcrab@gmail.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "ijson>=3.6.0",
+    "python-dotenv>=1.2.4",
+]
 
 [project.scripts]
-kaspersky-python = "kaspersky_python:main"
+main = "kaspersky_python.main:main"
+migrate = "kaspersky_python.migrate:migrate"
 
 [build-system]
 requires = ["uv_build>=0.13.5,<0.14.0"]
