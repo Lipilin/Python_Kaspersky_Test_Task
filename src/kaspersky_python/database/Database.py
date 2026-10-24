@@ -3,9 +3,9 @@ from __future__ import annotations
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import Engine, make_url
 
-from kaspersky_python.configs.mysql import mysql_url
+from kaspersky_python.configs.env import ENV_ERROR_MESSAGE, MYSQL_DATABASE
 from kaspersky_python.database.base import Base
-from kaspersky_python.database.tables import Product, Version, Vulnerability  # noqa: F401
+from kaspersky_python.utils.mysql import mysql_url
 
 
 class Database:
@@ -20,21 +20,27 @@ class Database:
         return cls._instance
 
     @property
-    def url(self) -> str:
+    def url(self):
         return self._url
 
     @property
-    def server_url(self) -> str:
+    def server_url(self):
         return self._server_url
 
     @property
     def engine(self) -> Engine:
         return self._engine
 
+    def create_tables(self) -> None:
+        Base.metadata.create_all(self._engine)
+
+    def reset_tables(self) -> None:
+        Base.metadata.drop_all(self._engine)
+
     def create_database(self) -> None:
-        database_name = make_url(self._url).database
+        database_name = self._url.database
         if not database_name:
-            raise ValueError("MYSQL_DATABASE не найден")
+            raise ValueError(ENV_ERROR_MESSAGE[MYSQL_DATABASE])
 
         server_engine = create_engine(self._server_url)
         try:
@@ -48,9 +54,3 @@ class Database:
                 connection.commit()
         finally:
             server_engine.dispose()
-
-    def create_tables(self) -> None:
-        Base.metadata.create_all(self._engine)
-
-    def reset_tables(self) -> None:
-        Base.metadata.drop_all(self._engine)
