@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from kaspersky_python.configs import BATCHING_SIZE
-from kaspersky_python.parser import parse
+from kaspersky_python.utils.parse import parse
 from typing import final
 
 class Migration(ABC):
