@@ -1,12 +1,18 @@
 from abc import ABC, abstractmethod
 from kaspersky_python.configs import BATCHING_SIZE
 from kaspersky_python.parser import parse
+from typing import final
 
 class Migration(ABC):
 
     def __init__(self, file_path: str) -> None:
         self.file_path = file_path
 
+    @final
+    def initialize_database(self) -> None:
+        pass
+
+    @final
     def migrate(self):
         batch = []
         for data in parse(self.file_path):
