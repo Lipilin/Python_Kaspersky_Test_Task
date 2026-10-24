@@ -9,12 +9,14 @@ authors = [
 requires-python = ">=3.12"
 dependencies = [
     "ijson>=3.6.0",
+    "pymysql>=1.1.0",
     "python-dotenv>=1.2.4",
+    "sqlalchemy>=2.0.0",
 ]
 
 [project.scripts]
 main = "kaspersky_python.main:main"
-migrate = "kaspersky_python.migrate:migrate"
+migrate = "kaspersky_python.migrate:main"
 
 [build-system]
 requires = ["uv_build>=0.13.5,<0.14.0"]
