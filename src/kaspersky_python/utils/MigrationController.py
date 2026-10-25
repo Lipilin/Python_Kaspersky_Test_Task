@@ -1,6 +1,6 @@
-from kaspersky_python.configs import VULNERABILITIES_DUMP
+from kaspersky_python.configs import VERSIONS_DUMP, VULNERABILITIES_DUMP
 from kaspersky_python.database import Database
-from kaspersky_python.migrations import VulnerabilitiesMigration
+from kaspersky_python.migrations import VersionsMigration, VulnerabilitiesMigration
 from kaspersky_python.migrations.ProductMigration import ProductMigration
 
 
@@ -11,6 +11,7 @@ class MigrationController:
     def migrate(self) -> None:
         self.initialize_database()
         self.migrate_products()
+        self.migrate_versions()
         self.migrate_vulnerabilities()
 
     def initialize_database(self) -> None:
@@ -21,6 +22,9 @@ class MigrationController:
 
     def migrate_products(self) -> None:
         ProductMigration(VULNERABILITIES_DUMP, self.__product_mapping).migrate()
+
+    def migrate_versions(self) -> None:
+        VersionsMigration(VERSIONS_DUMP, self.__product_mapping).migrate()
 
     def migrate_vulnerabilities(self) -> None:
         VulnerabilitiesMigration(VULNERABILITIES_DUMP, self.__product_mapping).migrate()
