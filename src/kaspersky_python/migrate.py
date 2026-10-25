@@ -1,10 +1,10 @@
 from kaspersky_python.configs import read_env
-from kaspersky_python.utils.MigrationController import MigrationController
+from kaspersky_python.console.MigrationConsole import MigrationConsole
 
 
 def main() -> None:
     read_env()
-    migration_controller = MigrationController()    
+    migration_controller = MigrationConsole()    
     migration_controller.migrate()
 
 
