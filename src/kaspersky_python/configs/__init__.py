@@ -1,5 +1,5 @@
 from .config import BATCHING_SIZE
-from .dumps import VULNERABILITIES_DUMP, VERSIONS_DUMP
+from .dumps import VULNERABILITIES_DUMP
 from .env import (
     ENV_ERROR_MESSAGE,
     MYSQL_DATABASE,
@@ -21,6 +21,5 @@ __all__ = [
     "MYSQL_URL",
     "MYSQL_USER",
     "VULNERABILITIES_DUMP",
-    "VERSIONS_DUMP",
     "read_env",
 ]
