@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+from typing import Self
+
 from sqlalchemy import create_engine, text
-from sqlalchemy.engine import Engine, make_url
+from sqlalchemy.engine import Engine
 
 from kaspersky_python.configs.env import ENV_ERROR_MESSAGE, MYSQL_DATABASE
 from kaspersky_python.database.base import Base
@@ -11,7 +13,7 @@ from kaspersky_python.utils.mysql import mysql_url
 class Database:
     _instance: Database | None = None
 
-    def __new__(cls) -> Database:
+    def __new__(cls) -> Self:
         if cls._instance is None:
             cls._instance = super().__new__(cls)
             cls._instance._url = mysql_url(with_database=True)

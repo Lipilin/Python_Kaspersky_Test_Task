@@ -4,7 +4,7 @@ from kaspersky_python.console.MigrationConsole import MigrationConsole
 
 def main() -> None:
     read_env()
-    migration_controller = MigrationConsole()    
+    migration_controller = MigrationConsole()
     migration_controller.migrate()
 
 

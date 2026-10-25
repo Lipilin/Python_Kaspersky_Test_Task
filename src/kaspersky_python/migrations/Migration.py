@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
-from kaspersky_python.configs import BATCHING_SIZE
-from kaspersky_python.utils.parse import parse
 from typing import final
 
-class Migration(ABC):
+from kaspersky_python.configs import BATCHING_SIZE
+from kaspersky_python.utils.parse import parse
 
+
+class Migration(ABC):
     def __init__(self, file_path: str) -> None:
         self.file_path = file_path
 
@@ -25,4 +26,6 @@ class Migration(ABC):
 
     @abstractmethod
     def save_data(self, batch: list) -> None:
-        raise NotImplementedError("Метод migrate должен быть реализован в классе-наследнике")
+        raise NotImplementedError(
+            "Метод migrate должен быть реализован в классе-наследнике"
+        )

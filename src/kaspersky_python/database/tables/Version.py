@@ -16,7 +16,9 @@ class Version(Base):
     __table_args__ = (UniqueConstraint("product_id", "version"),)
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    product_id: Mapped[int] = mapped_column(ForeignKey("products.id", ondelete="CASCADE"), nullable=False)
+    product_id: Mapped[int] = mapped_column(
+        ForeignKey("products.id", ondelete="CASCADE"), nullable=False
+    )
     version: Mapped[str] = mapped_column(String(255), nullable=False)
 
     product: Mapped[Product] = relationship(back_populates="versions")

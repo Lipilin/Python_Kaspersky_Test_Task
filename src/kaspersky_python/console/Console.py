@@ -1,7 +1,13 @@
 import sys
 
-from kaspersky_python.utils.fetchData import get_last_stable_version, get_vulnerabilities_data
-from kaspersky_python.utils.formatOutput import format_last_stable_version, format_vulnerabilities_data
+from kaspersky_python.utils.fetchData import (
+    get_last_stable_version,
+    get_vulnerabilities_data,
+)
+from kaspersky_python.utils.formatOutput import (
+    format_last_stable_version,
+    format_vulnerabilities_data,
+)
 
 
 class Console:
@@ -18,7 +24,7 @@ class Console:
             self.print_menu()
             try:
                 command = int(input())
-            except Exception as e:
+            except ValueError:
                 print("Некорректный ввод")
                 continue
             match command:

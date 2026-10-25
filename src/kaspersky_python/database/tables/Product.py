@@ -21,4 +21,6 @@ class Product(Base):
     vendor: Mapped[str] = mapped_column(String(255), nullable=False)
 
     versions: Mapped[list[Version]] = relationship(back_populates="product")
-    vulnerabilities: Mapped[list[Vulnerability]] = relationship(back_populates="product")
+    vulnerabilities: Mapped[list[Vulnerability]] = relationship(
+        back_populates="product"
+    )

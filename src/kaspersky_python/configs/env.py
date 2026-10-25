@@ -1,6 +1,7 @@
-from dotenv import load_dotenv
 import os
 import sys
+
+from dotenv import load_dotenv
 
 MYSQL_USER = "MYSQL_USER"
 MYSQL_PASSWORD = "MYSQL_PASSWORD"
@@ -25,6 +26,6 @@ def read_env() -> None:
         for key, value in ENV_ERROR_MESSAGE.items():
             if not os.getenv(key):
                 raise ValueError(value)
-    except Exception as e:
+    except (FileNotFoundError, ValueError) as e:
         print(f"Возникла ошибка: {e}")
         sys.exit(1)

@@ -15,7 +15,9 @@ def get_vulnerabilities_data(name: str, version: str) -> list[Vulnerability] | N
         product = get_product_by_name(session, name)
         if product is None:
             raise ValueError("Переданный продукт не найден")
-        product_versions = {product_version.version for product_version in product.versions}
+        product_versions = {
+            product_version.version for product_version in product.versions
+        }
         if version not in product_versions:
             raise ValueError("Переданная версия не найдена")
         vulnerabilities = [
@@ -35,7 +37,9 @@ def get_last_stable_version(name: str) -> str | None:
         if product is None:
             raise ValueError("Переданный продукт не найден")
         versions = [product_version.version for product_version in product.versions]
-        versions.extend(vulnerability.fixed_version for vulnerability in product.vulnerabilities)
+        versions.extend(
+            vulnerability.fixed_version for vulnerability in product.vulnerabilities
+        )
         if not versions:
             return None
         return max(versions, key=parse_version)

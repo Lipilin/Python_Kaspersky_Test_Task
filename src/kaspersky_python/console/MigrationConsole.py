@@ -1,5 +1,7 @@
 import sys
 
+from sqlalchemy.exc import SQLAlchemyError
+
 from kaspersky_python.utils.MigrationController import MigrationController
 
 
@@ -12,7 +14,7 @@ class MigrationConsole:
             self.__migrate_products(migration_controller)
             self.__migrate_versions(migration_controller)
             self.__migrate_vulnerabilities(migration_controller)
-        except Exception as e:
+        except (OSError, ValueError, FileNotFoundError, SQLAlchemyError) as e:
             print(f"Ошибка при миграции: {e}")
             sys.exit(1)
         print("Миграции завершена")
@@ -32,7 +34,9 @@ class MigrationConsole:
         migration_controller.migrate_versions()
         print("Миграция версий завершена")
 
-    def __migrate_vulnerabilities(self, migration_controller: MigrationController) -> None:
+    def __migrate_vulnerabilities(
+        self, migration_controller: MigrationController
+    ) -> None:
         print("Началась миграция уязвимостей")
         migration_controller.migrate_vulnerabilities()
         print("Миграция уязвимостей завершена")
